@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OverNight Demo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Cột trái: trải nghiệm thuật toán -->
+    <div class="left">
+      <h2>Thử thuật toán OverNight</h2>
+      <p><em>Mọi số chẵn &gt; 2 đều có thể biểu diễn dưới dạng 2 số nguyên tố.</em></p>
+
+      <label for="x">Nhập số chẵn:</label>
+      <input type="number" id="x" placeholder="VD: 100" />
+      <button onclick="solve()">Tìm A + B</button>
+
+      <p id="result">Kết quả sẽ hiển thị ở đây</p>
+
+      <p class="note">
+        ⚠️ Giới hạn thử nghiệm ≈ 2<sup>53</sup> (&nbsp;~9 triệu tỷ&nbsp;)<br/>
+        Đây là giới hạn kỹ thuật của máy tính,<br/>
+        <u>không phải giới hạn của thuật toán OverNight</u>.
+      </p>
+    </div>
+
+    <!-- Cột giữa: Thông tin tác giả -->
+    <div class="center">
+      <img src="snake.jpg" alt="Le Hung Dan" width="160"
+           style="border-radius:50%;margin-bottom:10px;box-shadow:0 0 6px rgba(0,0,0,.2);" />
+
+      <h3>Le Hung Dan</h3>
+      <p><strong>Quốc tịch:</strong> Việt Nam</p>
+      <p><strong>Email:</strong> snakenidalee@gmail.com</p>
+      <p><strong>Dự án:</strong> OverNight Project</p>
+      <p><strong>Vai trò:</strong> Người đưa ra phương pháp chứng minh<br/>
+         và tìm nghiệm của mọi số chẵn lớn hơn&nbsp;2.</p>
+      <p><strong>ORCID:</strong>
+        <a href="https://orcid.org/0009-0007-1543-6535" target="_blank">
+          0009-0007-1543-6535
+        </a>
+      </p>
+
+      <p style="margin-top:10px;font-style:italic">
+        “Có một đích đến mà ai cũng nhìn thấy nhưng gần 300&nbsp;năm
+        không ai chạm tới.<br/>
+        Không biết có bao con đường, nhưng tôi tự hào là người
+        tìm thấy con đường đầu tiên và bước về vạch đích.”
+      </p>
+    </div>
+
+    <!-- Cột phải: Dẫn dắt & tuyên bố -->
+    <div class="right">
+      <h2>Thông tin khác</h2>
+      <p>
+        Xin 3&nbsp;giây để đọc qua: <b>Số chẵn = nguyên tố + nguyên tố</b>.<br/>
+        Xin 3&nbsp;giây để thử → nhập X bên trái, click.<br/>
+        Nó đúng với mọi X chẵn từ&nbsp;4 đến vô cùng. Vậy tôi có công thức.<br/>
+        Xin tiếp 3&nbsp;giây nữa! Tôi tuyên bố là người đầu tiên
+        chứng minh mọi số chẵn &gt; 2 là tổng của 2&nbsp;số nguyên tố.<br/>
+        Không tin? Nhập X thật to (giới hạn 2<sup>53</sup> do máy tính).<br/>
+        Goldbach… Ngài hẳn vui khi tôi giúp trả lời?<br/>
+        Hãy để ai đó đủ tiếng nói lắng nghe và đưa công trình này ra thế giới!<br/>
+        Tôi nói không ai tin, mọi người đều cười tôi!
+      </p>
+
+      <p>
+        Đây là một bài toán kinh điển, nhưng cách giải lại vô cùng bình dị.<br/>
+        Không thuật ngữ cao siêu, không giả định thiếu khoa học, không phản chứng.<br/>
+        Lập luận xuất phát từ định nghĩa, mệnh đề và logic đã chứng minh.<br/>
+        Người biết chút toán, nếu nghi ngờ, chỉ cần vài giây để thấy
+        câu trả lời ở ngay trước mắt.
+      </p>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
