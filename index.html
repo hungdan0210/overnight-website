@@ -162,7 +162,9 @@
       result.textContent = "Đang tìm A + B...";
 
       // Fetch gọi API với giá trị x
-      fetch(`https://overnight-api-57tf.vercel.app/api/solve?x=${xStr}`)
+fetch(`https://overnight-api-57tf.vercel.app/solve?x=${xStr}`)
+
+
         .then(response => response.json())
         .then(data => {
           if (data.status === "success") {
