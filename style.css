@@ -2,91 +2,89 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f3f3f3;
-  color: #333;
+  background: #f4f4f4;
 }
 
 .container {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  padding: 20px;
-  gap: 20px;
+  padding: 20px 0;
 }
 
 .column {
   flex: 1;
-  background-color: white;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  margin: 0 10px;
   border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+#left-column {
+  margin-left: 50px;
+}
+
+#right-column {
+  margin-right: 50px;
 }
 
 input[type="text"] {
   width: 100%;
   padding: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 8px;
+  margin-bottom: 12px;
+  box-sizing: border-box;
   font-size: 16px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  background-color: #007bff;
-  color: white;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #0056b3;
 }
 
 .button-group {
   display: flex;
   gap: 10px;
-  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+.author-img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.note {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #555;
 }
 
 #result {
   margin-top: 15px;
   font-weight: bold;
-  white-space: pre-wrap;
+  color: green;
 }
 
 .log10info {
-  margin-top: 10px;
   font-style: italic;
-  color: #555;
-}
-
-.note {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #fff8dc;
-  border-left: 5px solid #ffcc00;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.author-img {
-  width: 100%;
-  max-width: 200px;
-  height: auto;
-  border-radius: 12px;
-  margin-bottom: 15px;
+  margin-top: 10px;
+  color: #333;
 }
 
 .share {
-  font-style: italic;
-  margin-top: 10px;
-  background-color: #eef;
-  padding: 10px;
-  border-radius: 8px;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.6;
 }

@@ -1,180 +1,53 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OverNight Demo</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    /* Nâng cấp khung cột trái */
-    .left {
-      padding: 20px;
-      background: #f9f9f9;
-      border-right: 1px solid #ccc;
-    }
-
-    .left input, .left button {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      margin-top: 10px;
-      box-sizing: border-box;
-    }
-
-    .left button {
-      background-color: #1976d2;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .left p.note {
-      margin-top: 20px;
-      background: #e3f2fd;
-      padding: 10px;
-      border-left: 4px solid #1976d2;
-      font-size: 14px;
-      color: #444;
-    }
-
-    .container {
-      display: flex;
-      flex-direction: row;
-      min-height: 100vh;
-    }
-
-    .center, .right {
-      padding: 20px;
-    }
-
-    .right h2 {
-      margin-top: 0;
-    }
-
-    img {
-      max-width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 0 6px rgba(0,0,0,0.2);
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thuật toán OverNight</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
 </head>
 <body>
   <div class="container">
+    <div class="column" id="left-column">
+      <h2>Trải nghiệm thuật toán</h2>
+      <label for="evenInput">Nhập số chẵn x:</label>
+      <input type="text" id="evenInput" placeholder="Ví dụ: 100">
+      <div class="button-group">
+        <button onclick="solve()">Tìm A + B</button>
+        <button onclick="abortFetch()">Dừng phép tính</button>
+      </div>
+      <div id="result">Kết quả sẽ hiển thị ở đây...</div>
+      <div class="log10info" id="log10info"></div>
+      <div class="note">
+        Đã thực nghiệm với Python trên PC cá nhân, tính toán với x trong khoảng 10^72 chỉ trong 5 giây.<br>
+        Hiện tại giới hạn được thiết lập là 10^20 để tránh treo máy hoặc quá tải API.<br>
+        Đây chỉ là bản kiểm chứng thử nghiệm thời gian thực.<br>
+      </div>
+    </div>
 
-    <!-- Cột trái: Trải nghiệm thuật toán -->
-<div class="column">
-  <h2>Thử nghiệm OverNight</h2>
-  <label for="evenInput">Nhập số chẵn x (≤ 10^20):</label><br>
-  <input type="text" id="evenInput" placeholder="Ví dụ: 100000000000000000000"><button onclick="findPair()">Tìm A + B</button>
-  <div class="result" id="result">Kết quả sẽ hiển thị tại đây...</div>
-  <div class="log10info" id="log10info"></div>
-  <div class="note">
-    ⚙️ Kiểm chứng thuật toán OverNight bằng Python (API thực thi trực tiếp).<br>
-    ⏱️ Trả kết quả trong thời gian thực.<br>
-    🔢 Giới hạn hiện tại: 10^20 (thiết lập để tránh API trả kết quả quá lâu).<br>
-    💡 Có thể test lớn hơn ở nơi khác (x > 10^30 chỉ mất 1 giây).
-  </div>
-</div>
-
-
-    <!-- Cột giữa: Thông tin tác giả -->
-    <div class="center">
-      <img src="snake.jpg" alt="Le Hung Dan" width="160"
-           style="border-radius:50%;margin-bottom:10px;" />
-
-      <h3>Le Hung Dan</h3>
+    <div class="column" id="middle-column">
+      <img src="author.jpg" alt="Tác giả" class="author-img">
+      <p><strong>Tên:</strong> Le Hung Dan</p>
       <p><strong>Quốc tịch:</strong> Việt Nam</p>
       <p><strong>Email:</strong> snakenidalee@gmail.com</p>
-      <p><strong>Dự án:</strong> OverNight Project</p>
-      <p><strong>Vai trò:</strong> Người đưa ra phương pháp chứng minh<br/>
-         và tìm nghiệm của mọi số chẵn lớn hơn&nbsp;2.</p>
-      <p><strong>ORCID:</strong>
-        <a href="https://orcid.org/0009-0007-1543-6535" target="_blank">
-          0009-0007-1543-6535
-        </a>
-      </p>
-
-      <p style="margin-top:10px;font-style:italic">
-        “Có một đích đến mà ai cũng nhìn thấy nhưng gần 300&nbsp;năm
-        không ai chạm tới.<br/>
-        Không biết có bao con đường, nhưng tôi tự hào là người
-        tìm thấy con đường đầu tiên và bước về vạch đích.”
-      </p>
+      <p><strong>Biệt danh hành trình:</strong> OverNight Project</p>
+      <p><strong>Vai trò:</strong> Người đầu tiên công bố giải pháp cho 'thuật toán OverNight' bằng lý thuyết tập hợp, thuật toán và thực nghiệm.</p>
+      <div class="share">
+        Tôi không phải nhà toán học. Tôi không có học hàm, học vị. Tôi chỉ là một người bình thường.<br>
+        Vì thế, tôi không được lắng nghe. Không ai nhìn, không ai đọc.<br>
+        Nhưng tôi đã tìm ra một cách giải cho 'thuật toán OverNight' bằng lập luận logic, thuật toán và thực nghiệm.<br>
+        Nếu bạn thấy điều này hợp lý và đáng tin, xin hãy giúp lan tỏa.<br>
+        Có thể bạn là cầu nối giúp lời giải này đến được với những người đủ năng lực để xác thực nó.
+      </div>
     </div>
 
-    <!-- Cột phải: Dẫn dắt & tuyên bố -->
-    <div class="right">
-      <h2>Thông tin khác</h2>
-      <p>
-        Xin 3&nbsp;giây để đọc qua: <b>Số chẵn = nguyên tố + nguyên tố</b>.<br/>
-        Xin 3&nbsp;giây để thử → nhập X bên trái, click.<br/>
-        Nó đúng với mọi X chẵn từ&nbsp;4 đến vô cùng. Vậy tôi có công thức.<br/>
-        Xin tiếp 3&nbsp;giây nữa! Tôi tuyên bố là người đầu tiên
-        chứng minh mọi số chẵn &gt; 2 là tổng của 2&nbsp;số nguyên tố.<br/>
-        Tại đây tôi cài đặt thử nghiệm tới X = 2<sup>53</sup>,
-        vượt xa mốc 10<sup>18</sup> mà thế giới từng kiểm chứng.<br/>
-        Goldbach… Ngài hẳn vui khi tôi giúp trả lời?<br/>
-        Hãy để ai đó đủ tiếng nói lắng nghe và đưa công trình này ra thế giới!<br/>
-        Tôi nói không ai tin, mọi người đều cười tôi!
-      </p>
-
-      <p>
-        Đây là một bài toán kinh điển, nhưng cách giải lại vô cùng bình dị.<br/>
-        Không thuật ngữ cao siêu, không giả định thiếu khoa học, không phản chứng.<br/>
-        Lập luận xuất phát từ định nghĩa, mệnh đề và logic đã chứng minh.<br/>
-        Người biết chút toán, nếu nghi ngờ, chỉ cần vài giây để thấy
-        câu trả lời ở ngay trước mắt.
-      </p>
+    <div class="column" id="right-column">
+      <h2>Thông tin thêm</h2>
+      <p>Bản trình bày thuật toán OverNight và giao diện thử nghiệm.</p>
+      <p>Liên kết đến <a href="https://zenodo.org/records/15730097" target="_blank">Zenodo</a></p>
+      <p>Trang demo này không chứa mã thuật toán thật — tất cả xử lý đều gọi qua API bảo mật.</p>
     </div>
-
   </div>
-
-  <script>
-  async function findPair() {
-    const xInput = document.getElementById("evenInput").value.trim();
-    const resultDiv = document.getElementById("result");
-    const log10Div = document.getElementById("log10info");
-
-    if (!/^\d+$/.test(xInput)) {
-      resultDiv.innerText = "❌ Vui lòng nhập một số chẵn hợp lệ.";
-      log10Div.innerText = "";
-      return;
-    }
-
-    const x = BigInt(xInput);
-    const MAX = 10n ** 20n;
-    if (x % 2n !== 0n || x < 4n) {
-      resultDiv.innerText = "❌ x phải là số chẵn ≥ 4.";
-      log10Div.innerText = "";
-      return;
-    }
-    if (x > MAX) {
-      resultDiv.innerText = "❌ x vượt quá giới hạn cho phép (10^20).";
-      log10Div.innerText = "";
-      return;
-    }
-
-    resultDiv.innerText = "⏳ Đang xử lý...";
-    log10Div.innerText = "";
-
-    try {
-      const response = await fetch("https://overnight-api-57tf.vercel.app/solve?x=" + x.toString());
-      const data = await response.json();
-
-      if (data.status === "success") {
-        resultDiv.innerText = `✅ Tìm được: ${data.a} + ${data.b} = ${data.sum}`;
-        const digits = x.toString().length;
-        log10Div.innerText = `🔎 Con số bạn vừa thử sấp xỉ 10^${digits}`;
-      } else {
-        resultDiv.innerText = "❌ Không tìm thấy nghiệm phù hợp.";
-      }
-    } catch (error) {
-      resultDiv.innerText = "🚫 Lỗi kết nối đến máy chủ.";
-    }
-  }
-</script>
-
-
 </body>
 </html>
