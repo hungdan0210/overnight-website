@@ -3,21 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>OverNight – Kiểm nghiệm số rất lớn</title>
+  <title>OverNight – Web Demo</title>
   <style>
     body {
+      margin: 0;
+      padding: 0;
       font-family: Arial, sans-serif;
-      max-width: 700px;
-      margin: 50px auto;
-      padding: 20px;
-      background: #f9f9f9;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
     }
-    h1 {
-      color: #333;
+
+    header {
+      background-color: #1976d2;
+      color: white;
       text-align: center;
+      padding: 20px;
+      font-size: 24px;
+      font-weight: bold;
     }
+
+    .container {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .column {
+      flex: 1;
+      padding: 20px;
+      box-sizing: border-box;
+      border-right: 1px solid #ccc;
+    }
+
+    .column:last-child {
+      border-right: none;
+    }
+
     input, button {
       padding: 10px;
       font-size: 16px;
@@ -25,40 +47,72 @@
       width: 100%;
       box-sizing: border-box;
     }
+
     button {
-      cursor: pointer;
       background-color: #1976d2;
       color: white;
       border: none;
       border-radius: 4px;
+      cursor: pointer;
     }
+
     #result {
       margin-top: 20px;
       font-weight: bold;
-      color: #444;
     }
+
     #note {
       margin-top: 30px;
       font-size: 14px;
-      color: #555;
-      background: #e0f7fa;
+      color: #444;
+      background: #e3f2fd;
       padding: 10px;
-      border-left: 4px solid #00796b;
+      border-left: 4px solid #1976d2;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
-  <h1>OverNight Algorithm – Thử nghiệm với số chẵn rất lớn</h1>
 
-  <p>Nhập số chẵn x (tối đa 10<sup>25</sup>):</p>
-  <input type="text" id="input" placeholder="Ví dụ: 1000000000000000000000000" />
-  <br/>
-  <button id="findButton">Tìm A + B</button>
+  <header>OverNight Algorithm – Web Demo</header>
 
-  <div id="result">Kết quả sẽ hiển thị tại đây.</div>
+  <div class="container">
+    <!-- Cột trái: Trải nghiệm thuật toán -->
+    <div class="column">
+      <h3>Thử nghiệm A + B = x</h3>
+      <input type="text" id="input" placeholder="Nhập số chẵn, ví dụ: 1000000" />
+      <button id="findButton">Tìm A + B</button>
+      <div id="result">Kết quả sẽ hiển thị tại đây.</div>
 
-  <div id="note">
-    Thế giới đã chứng minh tới X = 10<sup>18</sup>. Thuật toán ở đây tôi dùng với hạn chế call API và code bằng Python, tôi nhẹ nhàng setup với 10<sup>25</sup> tại đây. Mặc dù test nhẹ ở chỗ khác với x &gt; 10<sup>30</sup> vẫn chỉ mất 1 giây trả về kết quả.
+      <div id="note">
+        Thế giới đã chứng minh tới X = 10<sup>18</sup>.<br>
+        Thuật toán ở đây tôi dùng với hạn chế call API và code bằng Python, tôi nhẹ nhàng setup với 10<sup>25</sup> tại đây.<br>
+        Mặc dù test nhẹ ở chỗ khác với x &gt; 10<sup>30</sup> vẫn chỉ mất 1 giây trả về kết quả.
+      </div>
+    </div>
+
+    <!-- Cột giữa: Thông tin tác giả -->
+    <div class="column">
+      <h3>Thông tin tác giả</h3>
+      <!-- Ảnh sẽ được thêm sau -->
+      <p><strong>Tên:</strong> Le Hung Dan</p>
+      <p><strong>Quốc tịch:</strong> Việt Nam</p>
+      <p><strong>Email:</strong> snakenidalee@gmail.com</p>
+      <p><strong>Dự án:</strong> OverNight Project</p>
+      <p><strong>Vai trò:</strong> Người đầu tiên công bố lời giải cho 'thuật toán OverNight' bằng tập hợp, thuật toán và thực nghiệm.</p>
+      <p><strong>ORCID:</strong> <a href="https://orcid.org/0009-0007-1543-6535" target="_blank">0009-0007-1543-6535</a></p>
+      <p><strong>Zenodo:</strong> <a href="https://zenodo.org/records/15730097" target="_blank">Xem công bố</a></p>
+    </div>
+
+    <!-- Cột phải: Nội dung thêm sau -->
+    <div class="column">
+      <h3>Thông tin khác</h3>
+      <p>Phần này đang cập nhật...</p>
+    </div>
   </div>
 
   <script>
@@ -107,5 +161,6 @@
       });
     });
   </script>
+
 </body>
 </html>
