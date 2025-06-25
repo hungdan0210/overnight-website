@@ -160,21 +160,10 @@
 
     result.textContent = "Đang tìm A + B...";
 
-    fetch(`https://overnight-api.vercel.app/api/solve?x=${xStr}`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.status === "success") {
-          result.textContent = `Tìm được: ${data.sum} (A = ${data.a}, B = ${data.b})`;
-        } else if (data.error) {
-          result.textContent = `Lỗi: ${data.error}`;
-        } else {
-          result.textContent = "Không tìm thấy nghiệm phù hợp.";
-        }
-      })
-      .catch(error => {
-        console.error("Lỗi kết nối:", error);
-        result.textContent = "Lỗi kết nối đến máy chủ.";
-      });
+fetch(`https://overnight-api.vercel.app/api/solve?x=100`)
+  .then(response => response.json())
+  .then(console.log)
+  .catch(console.error);
   }
 </script>
 
