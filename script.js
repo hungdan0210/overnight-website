@@ -72,3 +72,88 @@ async function solve() {
     resultEl.innerText = "Đã xảy ra lỗi kết nối hoặc xử lý.";
   }
 }
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thuật toán OverNight</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="column">
+      <h2>Thử nghiệm thuật toán</h2>
+      <label for="input">Nhập số chẵn x:</label>
+      <input id="input" type="text" />
+      <div class="button-group">
+        <button onclick="findPair()">Tìm A + B</button>
+        <button onclick="stopFetch()">⛔ Dừng tính toán</button>
+      </div>
+      <div id="result">Kết quả sẽ hiển thị tại đây...</div>
+      <div class="log10info" id="loginfo"></div>
+      <div class="note">
+        🌍 Thế giới đã kiểm chứng đến x = 10<sup>18</sup>. Tại đây, tôi giới hạn đến 10<sup>20</sup> để bảo vệ API.  
+        ⚡ Tuy nhiên, ở nơi khác tôi đã kiểm chứng với x ≈ 10<sup>72</sup>, trả về kết quả chỉ trong ~5 giây bằng máy tính cá nhân.  
+        🧪 Đây là kiểm chứng thực hiện bằng Python, có giới hạn kỹ thuật.
+      </div>
+    </div>
+
+    <div class="column">
+      <img src="author.jpg" alt="Author" class="author-img"/>
+      <h3>Thông tin tác giả</h3>
+      <p><strong>Tên:</strong> Le Hung Dan</p>
+      <p><strong>Quốc tịch:</strong> Việt Nam</p>
+      <p><strong>Email:</strong> snakenidalee@gmail.com</p>
+      <p><strong>Biệt danh hành trình:</strong> OverNight Project</p>
+      <p><strong>Vai trò:</strong> Người đầu tiên công bố lời giải cho thuật toán OverNight bằng lý thuyết tập hợp, thuật toán và thực nghiệm.</p>
+      <p class="share">“Tôi không phải nhà toán học... Nếu bạn thấy điều này hợp lý, xin hãy giúp lan tỏa.”</p>
+    </div>
+
+    <div class="column">
+      <h3>Tuyên bố & Giải thích</h3>
+      <p>Dự án OverNight là một khám phá độc lập... Thuật toán không được công bố công khai mà được kiểm chứng qua API bảo mật.</p>
+      <p>Mọi lời gọi API thực hiện theo thời gian thực, không tiết lộ thuật toán thật.</p>
+    </div>
+  </div>
+
+  <script>
+    let controller;
+
+    function stopFetch() {
+      if (controller) {
+        controller.abort();
+        document.getElementById("result").innerText = "⛔ Đã dừng tính toán.";
+        document.getElementById("loginfo").innerText = "";
+      }
+    }
+
+    function findPair() {
+      const input = document.getElementById("input").value;
+      const x = BigInt(input);
+      const log10 = Math.floor(Math.log10(Number(x)));
+      document.getElementById("loginfo").innerText = `🔢 Con số bạn vừa thử sấp xỉ 10^${log10}`;
+
+      document.getElementById("result").innerText = "⏳ Đang tìm nghiệm...";
+
+      controller = new AbortController();
+
+      fetch(`https://overnight-api-57tf.vercel.app/solve?x=${x.toString()}`, {
+        signal: controller.signal
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === "success") {
+            document.getElementById("result").innerText = `✅ Tìm được: ${data.sum}`;
+          } else {
+            document.getElementById("result").innerText = "❌ Không tìm thấy nghiệm phù hợp.";
+          }
+        })
+        .catch(error => {
+          if (error.name === "AbortError") return;
+          document.getElementById("result").innerText = "❌ Lỗi kết nối đến máy chủ.";
+        });
+    }
+  </script>
+</body>
+</html>

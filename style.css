@@ -1,97 +1,92 @@
-/* ===== OverNight Demo – style.css (hardened) ===== */
-
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  background-color: #f3f3f3;
+  color: #333;
 }
 
-/* ----- Grid 3 cột ----- */
 .container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  min-height: 100vh;
-}
-
-.left,
-.center,
-.right {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   padding: 20px;
-  border-right: 1px solid #ddd;
+  gap: 20px;
 }
 
-.right { border-right: none; }
+.column {
+  flex: 1;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
 
-/* ----- Form input & button ----- */
-input[type="number"] {
+input[type="text"] {
   width: 100%;
   padding: 10px;
-  margin: 10px 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
   font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
 button {
   padding: 10px 20px;
   font-size: 16px;
-  cursor: pointer;
-  background: #2d89ef;
-  color: #fff;
+  margin-top: 10px;
   border: none;
-  border-radius: 5px;
-  transition: background 0.2s;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  transition: background-color 0.3s ease;
 }
 
-button:hover { background: #1b5fbf; }
+button:hover {
+  background-color: #0056b3;
+}
 
-/* ----- Kết quả ----- */
+.button-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 #result {
-  margin-top: 20px;
-  font-weight: 700;
-  font-size: 18px;
-  color: #2e7d32;
+  margin-top: 15px;
+  font-weight: bold;
+  white-space: pre-wrap;
 }
 
-/* ----- Ghi chú nhỏ ----- */
-.note {
-  margin-top: 20px;
-  font-size: 14px;
-  color: #999;
-}
-
-/* ----- Phần trung tâm ----- */
-.center { text-align: left; }
-
-.center a {
-  color: #2d89ef;
-  text-decoration: none;
-}
-.center a:hover { text-decoration: underline; }
-
-/* ----- Responsive (≤ 768px) ----- */
-@media (max-width: 768px) {
-  .container { grid-template-columns: 1fr; }
-
-  .left,
-  .center,
-  .right {
-    border-right: none;
-    border-bottom: 1px solid #ddd;
-  }
-  .right { border-bottom: none; }
-}
-/* Hiển thị log10 ước lượng */
 .log10info {
   margin-top: 10px;
-  font-size: 14px;
-  color: #666;
   font-style: italic;
+  color: #555;
 }
 
-/* Chú thích mô tả kết quả thực nghiệm */
 .note {
-  margin-top: 12px;
-  font-size: 15px;
-  color: #333;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #fff8dc;
+  border-left: 5px solid #ffcc00;
+  font-size: 14px;
   line-height: 1.5;
+}
+
+.author-img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.share {
+  font-style: italic;
+  margin-top: 10px;
+  background-color: #eef;
+  padding: 10px;
+  border-radius: 8px;
 }
