@@ -132,12 +132,12 @@
 
   </div>
 
-  <script>
+ <script>
   function solve() {
     const input = document.getElementById("x").value.trim();
     const result = document.getElementById("result");
 
-    // Kiểm tra nhập liệu
+    // Kiểm tra nhập liệu (đảm bảo số nguyên và chẵn)
     if (!/^\d+$/.test(input)) {
       result.textContent = "Vui lòng nhập một số chẵn hợp lệ.";
       return;
@@ -161,7 +161,7 @@
 
     result.textContent = "Đang tìm A + B...";
 
-    // Cập nhật fetch để đảm bảo string được sử dụng đúng
+    // Fetch gọi API với giá trị x
     fetch(`https://overnight-api-57tf.vercel.app/api/solve?x=${xStr}`)
       .then(response => response.json())
       .then(data => {
@@ -179,6 +179,7 @@
       });
   }
 </script>
+
 
 
 
