@@ -143,26 +143,24 @@
       return;
     }
 
-    const x = BigInt(input);  // dùng BigInt để xử lý số lớn
-    const max = 10n ** 25n;  // Giới hạn kiểm nghiệm là 10^25
+    let x = parseInt(input);  // Dùng parseInt thay vì BigInt
+    const max = Math.pow(2, 53);  // Giới hạn kiểm nghiệm là 2^53
 
     // Kiểm tra giới hạn
-    if (x < 4n || x % 2n !== 0n) {
+    if (x < 4 || x % 2 !== 0) {
       result.textContent = "Vui lòng nhập số chẵn ≥ 4.";
       return;
     }
 
     if (x > max) {
-      result.textContent = "Vượt quá giới hạn kiểm nghiệm tại đây (10^25).";
+      result.textContent = "Vượt quá giới hạn kiểm nghiệm tại đây (2^53).";
       return;
     }
 
-    const xStr = x.toString();  // Convert BigInt to string
-
     result.textContent = "Đang tìm A + B...";
 
-    // Fetch gọi API với giá trị x
-    fetch(`https://overnight-api-57tf.vercel.app/api/solve?x=${xStr}`)
+    // Gọi API với giá trị x
+    fetch(`https://overnight-api-57tf.vercel.app/api/solve?x=${x}`)
       .then(response => response.json())
       .then(data => {
         if (data.status === "success") {
@@ -179,6 +177,7 @@
       });
   }
 </script>
+
 
 
 
