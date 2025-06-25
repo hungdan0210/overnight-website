@@ -156,11 +156,9 @@
     }
 
     const xStr = x.toString();
-    console.log("Gửi x:", xStr);
-
     result.textContent = "Đang tìm A + B...";
 
-    fetch(`https://overnight-api.vercel.app/api/solve?x=${xStr}`)
+    fetch(`https://overnight-api-57tf.vercel.app/api/solve?x=${xStr}`)
       .then(response => response.json())
       .then(data => {
         if (data.status === "success") {
@@ -177,6 +175,7 @@
       });
   }
 </script>
+
 
 
 </body>
