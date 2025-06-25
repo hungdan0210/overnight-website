@@ -75,7 +75,7 @@
 
       <p class="note">
         Thế giới hiện nay mới chỉ kiểm chứng tới X = 10<sup>18</sup>.<br/>
-        Với giới hạn gọi API và ngôn ngữ lập trình Python, tôi lựa chọn thiết lập nhẹ nhàng mức kiểm nghiệm tại đây là X = 10<sup>25</sup>.<br/>
+        Với giới hạn gọi API và ngôn ngữ lập trình Python, tôi lựa chọn thiết lập nhẹ nhàng mức kiểm nghiệm tại đây là X = 2<sup>53</sup>.<br/>
         Tuy nhiên, ở môi trường khác, với các giá trị lớn hơn X = 10<sup>30</sup>, thuật toán này vẫn trả về kết quả chỉ trong khoảng 1 giây.
       </p>
     </div>
@@ -114,7 +114,7 @@
         Nó đúng với mọi X chẵn từ&nbsp;4 đến vô cùng. Vậy tôi có công thức.<br/>
         Xin tiếp 3&nbsp;giây nữa! Tôi tuyên bố là người đầu tiên
         chứng minh mọi số chẵn &gt; 2 là tổng của 2&nbsp;số nguyên tố.<br/>
-        Tại đây tôi cài đặt thử nghiệm tới X = 10<sup>25</sup>,
+        Tại đây tôi cài đặt thử nghiệm tới X = 2<sup>53</sup>,
         vượt xa mốc 10<sup>18</sup> mà thế giới từng kiểm chứng.<br/>
         Goldbach… Ngài hẳn vui khi tôi giúp trả lời?<br/>
         Hãy để ai đó đủ tiếng nói lắng nghe và đưa công trình này ra thế giới!<br/>
@@ -144,7 +144,7 @@
       }
 
       const x = BigInt(input);  // dùng BigInt để xử lý số lớn
-      const max = 10n ** 25n;  // Giới hạn kiểm nghiệm là 10^25
+      const max = Math.pow(2, 53);  // Giới hạn kiểm nghiệm là 2^53
 
       // Kiểm tra giới hạn
       if (x < 4n || x % 2n !== 0n) {
@@ -153,7 +153,7 @@
       }
 
       if (x > max) {
-        result.textContent = "Vượt quá giới hạn kiểm nghiệm tại đây (10^25).";
+        result.textContent = "Vượt quá giới hạn kiểm nghiệm tại đây (2^53).";
         return;
       }
 
