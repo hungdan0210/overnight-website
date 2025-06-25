@@ -8,7 +8,8 @@ body {
 .container {
   display: flex;
   justify-content: space-between;
-  padding: 20px 0;
+  padding: 20px 50px; /* 50px mỗi bên */
+  gap: 20px;
 }
 
 .column {
