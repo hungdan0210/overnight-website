@@ -5,6 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OverNight Demo</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Nâng cấp khung cột trái */
+    .left {
+      padding: 20px;
+      background: #f9f9f9;
+      border-right: 1px solid #ccc;
+    }
+
+    .left input, .left button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+      box-sizing: border-box;
+    }
+
+    .left button {
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .left p.note {
+      margin-top: 20px;
+      background: #e3f2fd;
+      padding: 10px;
+      border-left: 4px solid #1976d2;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      min-height: 100vh;
+    }
+
+    .center, .right {
+      padding: 20px;
+    }
+
+    .right h2 {
+      margin-top: 0;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 0 6px rgba(0,0,0,0.2);
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -30,7 +83,7 @@
     <!-- Cột giữa: Thông tin tác giả -->
     <div class="center">
       <img src="snake.jpg" alt="Le Hung Dan" width="160"
-           style="border-radius:50%;margin-bottom:10px;box-shadow:0 0 6px rgba(0,0,0,.2);" />
+           style="border-radius:50%;margin-bottom:10px;" />
 
       <h3>Le Hung Dan</h3>
       <p><strong>Quốc tịch:</strong> Việt Nam</p>
@@ -61,7 +114,8 @@
         Nó đúng với mọi X chẵn từ&nbsp;4 đến vô cùng. Vậy tôi có công thức.<br/>
         Xin tiếp 3&nbsp;giây nữa! Tôi tuyên bố là người đầu tiên
         chứng minh mọi số chẵn &gt; 2 là tổng của 2&nbsp;số nguyên tố.<br/>
-        Không tin? Nhập X thật to (giới hạn 2<sup>53</sup> do máy tính).<br/>
+        Tại đây tôi cài đặt thử nghiệm tới X = 10<sup>25</sup>,
+        vượt xa mốc 10<sup>18</sup> mà thế giới từng kiểm chứng.<br/>
         Goldbach… Ngài hẳn vui khi tôi giúp trả lời?<br/>
         Hãy để ai đó đủ tiếng nói lắng nghe và đưa công trình này ra thế giới!<br/>
         Tôi nói không ai tin, mọi người đều cười tôi!
