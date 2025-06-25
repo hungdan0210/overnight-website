@@ -133,46 +133,50 @@
   </div>
 
   <script>
-    function solve() {
-      const input = document.getElementById("x").value.trim();
-      const result = document.getElementById("result");
+  function solve() {
+    const input = document.getElementById("x").value.trim();
+    const result = document.getElementById("result");
 
-      if (!/^\d+$/.test(input)) {
-        result.textContent = "Vui lòng nhập một số chẵn hợp lệ.";
-        return;
-      }
-
-      const x = BigInt(input);
-      const max = 10n ** 25n;
-
-      if (x < 4n || x % 2n !== 0n) {
-        result.textContent = "Vui lòng nhập số chẵn ≥ 4.";
-        return;
-      }
-
-      if (x > max) {
-        result.textContent = "Vượt quá giới hạn kiểm nghiệm tại đây (10^25).";
-        return;
-      }
-
-      result.textContent = "Đang tìm A + B...";
-
-      fetch(`https://overnight-api.vercel.app/api/solve?x=${x}`)
-        .then(response => response.json())
-        .then(data => {
-          if (data.status === "success") {
-            result.textContent = `Tìm được: ${data.sum} (A = ${data.a}, B = ${data.b})`;
-          } else if (data.error) {
-            result.textContent = `Lỗi: ${data.error}`;
-          } else {
-            result.textContent = "Không tìm thấy nghiệm phù hợp.";
-          }
-        })
-        .catch(error => {
-          console.error("Lỗi kết nối:", error);
-          result.textContent = "Lỗi kết nối đến máy chủ.";
-        });
+    if (!/^\d+$/.test(input)) {
+      result.textContent = "Vui lòng nhập một số chẵn hợp lệ.";
+      return;
     }
-  </script>
+
+    const x = BigInt(input);
+    const max = 10n ** 25n;
+
+    if (x < 4n || x % 2n !== 0n) {
+      result.textContent = "Vui lòng nhập số chẵn ≥ 4.";
+      return;
+    }
+
+    if (x > max) {
+      result.textContent = "Vượt quá giới hạn kiểm nghiệm tại đây (10^25).";
+      return;
+    }
+
+    const xStr = x.toString(); // ✅ fix quan trọng
+    console.log("Gửi x:", xStr); // ✅ giúp debug dễ hơn
+
+    result.textContent = "Đang tìm A + B...";
+
+    fetch(`https://overnight-api.vercel.app/api/solve?x=${xStr}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === "success") {
+          result.textContent = `Tìm được: ${data.sum} (A = ${data.a}, B = ${data.b})`;
+        } else if (data.error) {
+          result.textContent = `Lỗi: ${data.error}`;
+        } else {
+          result.textContent = "Không tìm thấy nghiệm phù hợp.";
+        }
+      })
+      .catch(error => {
+        console.error("Lỗi kết nối:", error);
+        result.textContent = "Lỗi kết nối đến máy chủ.";
+      });
+  }
+</script>
+
 </body>
 </html>
