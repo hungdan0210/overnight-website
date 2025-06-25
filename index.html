@@ -75,7 +75,7 @@
 
       <p class="note">
         Thế giới hiện nay mới chỉ kiểm chứng tới X = 10<sup>18</sup>.<br/>
-        Với giới hạn gọi API và ngôn ngữ lập trình Python, tôi lựa chọn thiết lập nhẹ nhàng mức kiểm nghiệm tại đây là X = 2<sup>53</sup>.<br/>
+        Với giới hạn gọi API và ngôn ngữ lập trình Java, tôi lựa chọn thiết lập nhẹ nhàng mức kiểm nghiệm tại đây là X = 2<sup>53</sup>.<br/>
         Tuy nhiên, ở môi trường khác, với các giá trị lớn hơn X = 10<sup>30</sup>, thuật toán này vẫn trả về kết quả chỉ trong khoảng 1 giây.
       </p>
     </div>
@@ -143,11 +143,11 @@
         return;
       }
 
-      const x = BigInt(input);  // dùng BigInt để xử lý số lớn
+      const x = Number(input);  // Sử dụng Number thay vì BigInt
       const max = Math.pow(2, 53);  // Giới hạn kiểm nghiệm là 2^53
 
       // Kiểm tra giới hạn
-      if (x < 4n || x % 2n !== 0n) {
+      if (x < 4 || x % 2 !== 0) {
         result.textContent = "Vui lòng nhập số chẵn ≥ 4.";
         return;
       }
@@ -157,7 +157,7 @@
         return;
       }
 
-      const xStr = x.toString();  // Convert BigInt to string
+      const xStr = x.toString();  // Convert Number to string
 
       result.textContent = "Đang tìm A + B...";
 
