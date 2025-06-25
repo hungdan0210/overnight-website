@@ -132,55 +132,51 @@
 
   </div>
 
-  <script>
-    function solve() {
-      const input = document.getElementById("x").value.trim();
-      const result = document.getElementById("result");
+ <script>
+  function solve() {
+    const input = document.getElementById("x").value.trim();
+    const result = document.getElementById("result");
 
-      // Kiểm tra nhập liệu (đảm bảo số nguyên và chẵn)
-      if (!/^\d+$/.test(input)) {
-        result.textContent = "Vui lòng nhập một số chẵn hợp lệ.";
-        return;
-      }
-
-      const x = Number(input);  // Sử dụng Number thay vì BigInt
-      const max = Math.pow(2, 53);  // Giới hạn kiểm nghiệm là 2^53
-
-      // Kiểm tra giới hạn
-      if (x < 4 || x % 2 !== 0) {
-        result.textContent = "Vui lòng nhập số chẵn ≥ 4.";
-        return;
-      }
-
-      if (x > max) {
-        result.textContent = "Vượt quá giới hạn kiểm nghiệm tại đây (2^53).";
-        return;
-      }
-
-      const xStr = x.toString();  // Convert Number to string
-
-      result.textContent = "Đang tìm A + B...";
-
-      // Fetch gọi API với giá trị x
-fetch(`https://overnight-api-57tf.vercel.app/solve?x=${xStr}`)
-
-
-        .then(response => response.json())
-        .then(data => {
-          if (data.status === "success") {
-            result.textContent = `Tìm được: ${data.sum} (A = ${data.a}, B = ${data.b})`;
-          } else if (data.error) {
-            result.textContent = `Lỗi: ${data.error}`;
-          } else {
-            result.textContent = "Không tìm thấy nghiệm phù hợp.";
-          }
-        })
-        .catch(error => {
-          console.error("Lỗi kết nối:", error);
-          result.textContent = "Lỗi kết nối đến máy chủ.";
-        });
+    // Kiểm tra nhập liệu (chỉ số, không dấu cách, không ký tự lạ)
+    if (!/^\d+$/.test(input)) {
+      result.textContent = "Vui lòng nhập một số chẵn hợp lệ.";
+      return;
     }
-  </script>
+
+    const x = BigInt(input);               // Dùng BigInt để nhận số rất lớn
+    const max = BigInt("10000000000000000000000000"); // 10^25
+
+    if (x < 4n || x % 2n !== 0n) {
+      result.textContent = "Vui lòng nhập số chẵn ≥ 4.";
+      return;
+    }
+
+    if (x > max) {
+      result.textContent = "Vượt quá giới hạn kiểm nghiệm tại đây (10^25).";
+      return;
+    }
+
+    const xStr = x.toString();             // Chuyển BigInt thành chuỗi để gửi API
+    result.textContent = "Đang tìm A + B...";
+
+    fetch(`https://overnight-api-57tf.vercel.app/solve?x=${xStr}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === "success") {
+          result.textContent = `Tìm được: ${data.sum} (A = ${data.a}, B = ${data.b})`;
+        } else if (data.error) {
+          result.textContent = `Lỗi: ${data.error}`;
+        } else {
+          result.textContent = "Không tìm thấy nghiệm phù hợp.";
+        }
+      })
+      .catch(error => {
+        console.error("Lỗi kết nối:", error);
+        result.textContent = "Lỗi kết nối đến máy chủ.";
+      });
+  }
+</script>
+
 
 </body>
 </html>
