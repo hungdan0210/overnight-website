@@ -80,3 +80,18 @@ button:hover { background: #1b5fbf; }
   }
   .right { border-bottom: none; }
 }
+/* Hiển thị log10 ước lượng */
+.log10info {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #666;
+  font-style: italic;
+}
+
+/* Chú thích mô tả kết quả thực nghiệm */
+.note {
+  margin-top: 12px;
+  font-size: 15px;
+  color: #333;
+  line-height: 1.5;
+}
