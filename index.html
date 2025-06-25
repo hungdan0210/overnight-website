@@ -63,22 +63,20 @@
   <div class="container">
 
     <!-- Cột trái: Trải nghiệm thuật toán -->
-    <div class="left">
-      <h2>Thử thuật toán OverNight</h2>
-      <p><em>Mọi số chẵn &gt; 2 đều có thể biểu diễn dưới dạng 2 số nguyên tố.</em></p>
+<div class="column">
+  <h2>Thử nghiệm OverNight</h2>
+  <label for="evenInput">Nhập số chẵn x (≤ 10^20):</label><br>
+  <input type="text" id="evenInput" placeholder="Ví dụ: 100000000000000000000"><button onclick="findPair()">Tìm A + B</button>
+  <div class="result" id="result">Kết quả sẽ hiển thị tại đây...</div>
+  <div class="log10info" id="log10info"></div>
+  <div class="note">
+    ⚙️ Kiểm chứng thuật toán OverNight bằng Python (API thực thi trực tiếp).<br>
+    ⏱️ Trả kết quả trong thời gian thực.<br>
+    🔢 Giới hạn hiện tại: 10^20 (thiết lập để tránh API trả kết quả quá lâu).<br>
+    💡 Có thể test lớn hơn ở nơi khác (x > 10^30 chỉ mất 1 giây).
+  </div>
+</div>
 
-      <label for="x">Nhập số chẵn:</label>
-      <input type="text" id="x" placeholder="VD: 1000000000000000000000" />
-      <button onclick="solve()">Tìm A + B</button>
-
-      <p id="result">Kết quả sẽ hiển thị ở đây</p>
-
-      <p class="note">
-        Thế giới hiện nay mới chỉ kiểm chứng tới X = 10<sup>18</sup>.<br/>
-        Với giới hạn gọi API và ngôn ngữ lập trình Java, tôi lựa chọn thiết lập nhẹ nhàng mức kiểm nghiệm tại đây là X = 2<sup>53</sup>.<br/>
-        Tuy nhiên, ở môi trường khác, với các giá trị lớn hơn X = 10<sup>30</sup>, thuật toán này vẫn trả về kết quả chỉ trong khoảng 1 giây.
-      </p>
-    </div>
 
     <!-- Cột giữa: Thông tin tác giả -->
     <div class="center">
@@ -132,48 +130,48 @@
 
   </div>
 
- <script>
-  function solve() {
-    const input = document.getElementById("x").value.trim();
-    const result = document.getElementById("result");
+  <script>
+  async function findPair() {
+    const xInput = document.getElementById("evenInput").value.trim();
+    const resultDiv = document.getElementById("result");
+    const log10Div = document.getElementById("log10info");
 
-    // Kiểm tra nhập liệu (chỉ số, không dấu cách, không ký tự lạ)
-    if (!/^\d+$/.test(input)) {
-      result.textContent = "Vui lòng nhập một số chẵn hợp lệ.";
+    if (!/^\d+$/.test(xInput)) {
+      resultDiv.innerText = "❌ Vui lòng nhập một số chẵn hợp lệ.";
+      log10Div.innerText = "";
       return;
     }
 
-    const x = BigInt(input);               // Dùng BigInt để nhận số rất lớn
-    const max = BigInt("10000000000000000000000000"); // 10^25
-
-    if (x < 4n || x % 2n !== 0n) {
-      result.textContent = "Vui lòng nhập số chẵn ≥ 4.";
+    const x = BigInt(xInput);
+    const MAX = 10n ** 20n;
+    if (x % 2n !== 0n || x < 4n) {
+      resultDiv.innerText = "❌ x phải là số chẵn ≥ 4.";
+      log10Div.innerText = "";
+      return;
+    }
+    if (x > MAX) {
+      resultDiv.innerText = "❌ x vượt quá giới hạn cho phép (10^20).";
+      log10Div.innerText = "";
       return;
     }
 
-    if (x > max) {
-      result.textContent = "Vượt quá giới hạn kiểm nghiệm tại đây (10^25).";
-      return;
+    resultDiv.innerText = "⏳ Đang xử lý...";
+    log10Div.innerText = "";
+
+    try {
+      const response = await fetch("https://overnight-api-57tf.vercel.app/solve?x=" + x.toString());
+      const data = await response.json();
+
+      if (data.status === "success") {
+        resultDiv.innerText = `✅ Tìm được: ${data.a} + ${data.b} = ${data.sum}`;
+        const digits = x.toString().length;
+        log10Div.innerText = `🔎 Con số bạn vừa thử sấp xỉ 10^${digits}`;
+      } else {
+        resultDiv.innerText = "❌ Không tìm thấy nghiệm phù hợp.";
+      }
+    } catch (error) {
+      resultDiv.innerText = "🚫 Lỗi kết nối đến máy chủ.";
     }
-
-    const xStr = x.toString();             // Chuyển BigInt thành chuỗi để gửi API
-    result.textContent = "Đang tìm A + B...";
-
-    fetch(`https://overnight-api-57tf.vercel.app/solve?x=${xStr}`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.status === "success") {
-          result.textContent = `Tìm được: ${data.sum} (A = ${data.a}, B = ${data.b})`;
-        } else if (data.error) {
-          result.textContent = `Lỗi: ${data.error}`;
-        } else {
-          result.textContent = "Không tìm thấy nghiệm phù hợp.";
-        }
-      })
-      .catch(error => {
-        console.error("Lỗi kết nối:", error);
-        result.textContent = "Lỗi kết nối đến máy chủ.";
-      });
   }
 </script>
 
